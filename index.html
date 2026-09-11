@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#dfeee2">
+  <title>Matcha Town — A Little Green World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="world">
+    <div class="grain"></div>
+    <div class="cloud cloud-a"></div><div class="cloud cloud-b"></div><div class="cloud cloud-c"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Matcha Town home"><span class="brand-cup">🍵</span><span>Matcha <b>Town</b></span></a>
+      <nav><a href="#town">Town</a><a href="#places">Places</a><a href="#friends">Friends</a></nav>
+      <div class="top-actions"><span class="clock" id="clock">☀️ 10:42 AM</span><button class="surprise" id="surpriseBtn">🎲 Surprise Me</button></div>
+    </header>
+
+    <main id="top">
+      <section class="welcome" id="town">
+        <div class="copy">
+          <span class="eyebrow">A little green world</span>
+          <h1>Welcome to<br><em>Matcha Town.</em></h1>
+          <p>A tiny cozy town where every corner has a story, every friend has a secret, and there is always time for a matcha break.</p>
+          <div class="hero-actions"><button class="primary" id="exploreBtn">Enter the town <span>↗</span></button><button class="ghost" id="storyBtn">Our little story</button></div>
+          <div class="tiny-note"><span>✦</span> made for slow days & happy little moments</div>
+        </div>
+
+        <div class="map-wrap" aria-label="Illustrated map of Matcha Town">
+          <div class="map-glow"></div><div class="sun">☀</div>
+          <div class="mountain m1"></div><div class="mountain m2"></div>
+          <div class="river"></div><div class="bridge">━━━━</div>
+          <div class="road road-main"></div><div class="road road-side"></div>
+          <div class="pond"></div>
+
+          <button class="place cafe" data-place="Matcha Café"><span class="building-art">🍵</span><span class="place-label"><b>Matcha Café</b><small>fresh & cozy</small></span></button>
+          <button class="place library" data-place="Cozy Library"><span class="building-art">📚</span><span class="place-label"><b>Cozy Library</b><small>quiet little books</small></span></button>
+          <button class="place garden" data-place="Blossom Garden"><span class="building-art">🌸</span><span class="place-label"><b>Blossom Garden</b><small>flowers & friends</small></span></button>
+          <button class="place shop" data-place="Little Shop"><span class="building-art">🛍️</span><span class="place-label"><b>Little Shop</b><small>tiny treasures</small></span></button>
+
+          <div class="tree t1">🌳</div><div class="tree t2">🌳</div><div class="tree t3">🌲</div><div class="tree t4">🌳</div>
+          <div class="flower f1">🌷</div><div class="flower f2">🌼</div><div class="flower f3">🌷</div><div class="flower f4">🌼</div>
+          <button class="friend bunny" data-friend="Momo">🐰<small>Momo</small></button>
+          <button class="friend bear" data-friend="Lottie">🧸<small>Lottie</small></button>
+          <button class="friend cat" data-friend="Mochi">🐱<small>Mochi</small></button>
+          <div class="spark s1">✦</div><div class="spark s2">✧</div><div class="spark s3">✦</div>
+          <div class="map-sign">MATCHA<br><b>TOWN</b></div>
+        </div>
+      </section>
+
+      <section class="places" id="places">
+        <div class="section-title"><span class="eyebrow">Take a little walk</span><h2>There is always<br><em>somewhere to go.</em></h2><p>Tap a place on the map or choose one below.</p></div>
+        <div class="place-grid">
+          <button class="place-card mint" data-place="Matcha Café"><span class="card-icon">🍵</span><span><b>Matcha Café</b><small>Latte, desserts & slow mornings</small></span><i>↗</i></button>
+          <button class="place-card cream" data-place="Blossom Garden"><span class="card-icon">🌸</span><span><b>Blossom Garden</b><small>Flowers, butterflies & Lottie</small></span><i>↗</i></button>
+          <button class="place-card sage" data-place="Cozy Library"><span class="card-icon">📚</span><span><b>Cozy Library</b><small>Stories, secrets & Mochi</small></span><i>↗</i></button>
+          <button class="place-card peach" data-place="Little Shop"><span class="card-icon">🛍️</span><span><b>Little Shop</b><small>Tiny treasures to collect</small></span><i>↗</i></button>
+        </div>
+      </section>
+
+      <section class="friends" id="friends">
+        <div><span class="eyebrow">Meet the locals</span><h2>Three tiny friends.<br><em>One cozy town.</em></h2></div>
+        <div class="friend-row">
+          <article><div class="avatar">🐰</div><b>Momo</b><small>Café keeper</small><p>Always has a warm cup ready.</p></article>
+          <article><div class="avatar pink">🧸</div><b>Lottie</b><small>Garden keeper</small><p>Loves flowers and secret paths.</p></article>
+          <article><div class="avatar gold">🐱</div><b>Mochi</b><small>Library cat</small><p>Usually found asleep on a book.</p></article>
+        </div>
+      </section>
+
+      <section class="secret" id="story">
+        <span>✦ A little secret</span><h2>Not every path<br>is on the map.</h2><p>Explore slowly. Sometimes the best surprises are hiding behind a tree.</p><button class="primary" id="secretBtn">Look around ↗</button>
+      </section>
+    </main>
+    <footer>🍵 <b>Matcha Town</b> · a little green world made for you.</footer>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
