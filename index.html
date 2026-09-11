@@ -8,7 +8,37 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+/* Matcha Town V1 — embedded fallback so the design works even when opened from a ZIP preview */
+:root{--ink:#214b39;--green:#316b50;--soft:#e5f0e4;--cream:#f8f3e6;--paper:#fffdf7;--muted:#6b8274;--line:#d7e3d7}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif}.world{min-height:100vh;position:relative;overflow:hidden;background:linear-gradient(#e2f0e5 0 46%,#f8f1df 46% 100%)}.grain{position:absolute;inset:0;opacity:.06;pointer-events:none;background-image:radial-gradient(#214b39 .7px,transparent .7px);background-size:9px 9px}.topbar{height:78px;padding:0 5.5vw;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:10;background:rgba(255,255,255,.66);backdrop-filter:blur(18px);border-bottom:1px solid #fff9}.brand{display:flex;gap:9px;align-items:center;color:var(--ink);text-decoration:none;font-weight:600;font-size:19px;letter-spacing:-.5px}.brand b{font-weight:800}.brand-cup{font-size:23px}nav{display:flex;gap:34px}nav a{font-size:12px;text-decoration:none;color:#416653;font-weight:700}nav a:hover{color:#173f2d}.top-actions{display:flex;align-items:center;gap:12px}.clock{font-size:11px;color:#567063;background:#ffffffb8;border:1px solid #dbe7dc;border-radius:99px;padding:9px 12px}.surprise,.primary,.ghost{border:0;border-radius:999px;cursor:pointer;font-family:inherit;font-weight:800}.surprise{padding:10px 15px;background:#fff;color:var(--green);border:1px solid #cdded0}.welcome{max-width:1240px;margin:auto;padding:68px 32px 85px;display:grid;grid-template-columns:.78fr 1.22fr;gap:55px;align-items:center;position:relative;z-index:2}.copy{padding-left:4px}.eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:10px;font-weight:800;color:#609073}.copy h1{font-size:clamp(52px,6.4vw,88px);line-height:.94;letter-spacing:-4px;margin:18px 0;color:#1b5139}.copy h1 em,.section-title h2 em,.friends h2 em{font-family:"Playfair Display",Georgia,serif;font-weight:500}.copy p{max-width:485px;line-height:1.8;font-size:14px;color:#60796b;margin:25px 0}.hero-actions{display:flex;gap:11px;align-items:center}.primary{padding:13px 20px;background:#245e43;color:white;box-shadow:0 13px 28px #245e4325}.primary span{margin-left:7px}.ghost{padding:12px 18px;background:transparent;color:#315d48;border:1px solid #bdd0c1}.tiny-note{font-size:10px;color:#789083;margin-top:28px;letter-spacing:.3px}.tiny-note span{color:#78a687;margin-right:6px}.map-wrap{height:570px;border:8px solid rgba(255,255,255,.72);border-radius:48px;position:relative;overflow:hidden;background:linear-gradient(#cfe7d6 0 45%,#a8d09e 45% 100%);box-shadow:0 30px 80px #31553e24}.map-glow{position:absolute;width:380px;height:380px;border-radius:50%;right:-70px;top:-120px;background:#fff6bd66;filter:blur(2px)}.sun{position:absolute;right:55px;top:40px;font-size:38px;color:#e5b95b;text-shadow:0 5px 15px #b8893025}.mountain{position:absolute;bottom:47%;width:72%;height:32%;background:#a5cf9c;border-radius:55% 55% 0 0}.m1{left:-10%;}.m2{right:-18%;height:27%;background:#b6d7a9}.river{position:absolute;width:25%;height:130%;right:18%;top:18%;background:#8fc9c4;transform:rotate(12deg);border-radius:50%;opacity:.92}.bridge{position:absolute;right:20%;top:47%;font-size:35px;letter-spacing:-5px;color:#9b7857;z-index:2;transform:rotate(12deg)}.road{position:absolute;background:#ead7b8;z-index:1;border-radius:50%}.road-main{width:25%;height:100%;left:41%;bottom:-34%;transform:rotate(-7deg)}.road-side{width:80%;height:12%;left:7%;bottom:34%;transform:rotate(4deg)}.pond{position:absolute;width:105px;height:58px;left:6%;bottom:17%;background:#82bfc0;border:6px solid #a6d4c8;border-radius:50%;z-index:2}.place{position:absolute;z-index:5;border:0;background:#fffdf5;border-radius:23px;width:142px;min-height:110px;padding:10px;box-shadow:0 14px 25px #244a3425;cursor:pointer;transition:.25s;display:flex;flex-direction:column;align-items:center;justify-content:center}.place:hover{transform:translateY(-9px) rotate(-1deg);box-shadow:0 22px 32px #244a3430}.building-art{font-size:38px;line-height:1}.place-label{display:block;text-align:center;margin-top:7px}.place-label b{display:block;font-size:11px;color:#315a46}.place-label small{display:block;font-size:8px;color:#819187;margin-top:2px}.cafe{left:12%;bottom:39%}.library{left:30%;bottom:12%}.garden{right:11%;bottom:30%}.shop{right:27%;bottom:8%}.tree{position:absolute;z-index:4;font-size:50px;filter:drop-shadow(0 7px 7px #31553e25)}.t1{left:3%;bottom:8%}.t2{left:22%;bottom:4%;font-size:42px}.t3{right:3%;bottom:10%;font-size:55px}.t4{right:37%;bottom:47%;font-size:40px}.flower{position:absolute;z-index:5;font-size:20px}.f1{left:8%;bottom:29%}.f2{left:25%;bottom:28%}.f3{right:7%;bottom:21%}.f4{right:33%;bottom:25%}.friend{position:absolute;z-index:7;border:0;background:transparent;cursor:pointer;font-size:31px;transition:.2s}.friend:hover{transform:translateY(-6px) scale(1.08)}.friend small{display:block;font-size:8px;font-weight:800;color:#315a46;background:#fffdf4cc;border-radius:20px;padding:3px 7px}.bunny{left:42%;bottom:22%}.bear{right:20%;bottom:20%}.cat{left:20%;bottom:43%}.spark{position:absolute;color:#fff8c8;font-size:20px;z-index:6;animation:twinkle 2.4s ease-in-out infinite}.s1{left:45%;top:24%}.s2{right:25%;top:34%;animation-delay:.7s}.s3{left:14%;top:46%;animation-delay:1.2s}@keyframes twinkle{50%{opacity:.35;transform:scale(.7) rotate(25deg)}}.map-sign{position:absolute;left:7%;top:8%;z-index:5;background:#fffdf3e8;border:1px solid #fff;border-radius:12px;padding:8px 11px;line-height:1.05;font-size:8px;letter-spacing:2px;box-shadow:0 8px 18px #34543a16}.map-sign b{font-size:12px;letter-spacing:1px}.cloud{position:absolute;z-index:1;width:125px;height:38px;background:#fff;border-radius:99px;opacity:.65}.cloud:before,.cloud:after{content:"";position:absolute;background:#fff;border-radius:50%}.cloud:before{width:55px;height:55px;left:22px;top:-25px}.cloud:after{width:45px;height:45px;right:20px;top:-18px}.cloud-a{top:125px;left:5%;animation:float 11s ease-in-out infinite}.cloud-b{top:190px;right:2%;transform:scale(.75);animation:float 14s ease-in-out infinite reverse}.cloud-c{top:335px;left:34%;transform:scale(.45);animation:float 13s ease-in-out infinite}@keyframes float{50%{translate:38px 5px}}.places{padding:95px 6vw 100px;position:relative;z-index:3;background:#f8f1df}.section-title{text-align:center;margin-bottom:38px}.section-title h2,.friends h2{font-size:50px;line-height:1.02;letter-spacing:-2px;margin:13px 0;color:#24533c}.section-title p{color:#74877c;font-size:13px}.place-grid{max-width:1120px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.place-card{min-height:145px;border:1px solid #e1e4d7;border-radius:28px;padding:20px;text-align:left;cursor:pointer;display:grid;grid-template-columns:45px 1fr 20px;gap:10px;align-items:center;font-family:inherit;color:var(--ink);transition:.22s}.place-card:hover{transform:translateY(-7px);box-shadow:0 20px 35px #34533c18}.place-card.mint{background:#e5f1e4}.place-card.cream{background:#fff6df}.place-card.sage{background:#dfe9df}.place-card.peach{background:#f8e9d9}.card-icon{font-size:34px}.place-card b{display:block;font-size:13px}.place-card small{display:block;color:#72847a;font-size:10px;line-height:1.5;margin-top:5px}.place-card i{font-style:normal;font-size:18px}.friends{padding:100px 7vw;background:#e2eee2;display:grid;grid-template-columns:.7fr 1.3fr;gap:50px;align-items:center}.friend-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.friend-row article{background:#fffdf7;border:1px solid #dbe5db;border-radius:28px;padding:22px;min-height:215px}.avatar{width:58px;height:58px;border-radius:20px;display:grid;place-items:center;font-size:32px;background:#e1f0df;margin-bottom:18px}.avatar.pink{background:#f4dfe4}.avatar.gold{background:#f4ead2}.friend-row b{display:block;font-size:15px}.friend-row small{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#6e8b79}.friend-row p{font-size:11px;color:#6b8075;line-height:1.6}.secret{max-width:920px;margin:90px auto;padding:65px;text-align:center;border-radius:38px;background:#244f3a;color:white;box-shadow:0 30px 60px #244f3a25}.secret span{text-transform:uppercase;letter-spacing:3px;font-size:9px;color:#b9d9bd}.secret h2{font-family:"Playfair Display",Georgia,serif;font-size:53px;font-weight:500;line-height:1;margin:18px 0}.secret p{max-width:460px;margin:0 auto 25px;color:#d3e3d4;font-size:12px;line-height:1.7}.secret .primary{background:#fff;color:#24533c}footer{text-align:center;padding:30px;color:#6c8175;font-size:10px}.toast{position:fixed;left:50%;bottom:26px;z-index:30;transform:translate(-50%,22px);opacity:0;background:#214f3a;color:#fff;padding:13px 20px;border-radius:999px;font-size:12px;box-shadow:0 15px 30px #173e2b35;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}@media(max-width:980px){nav{display:none}.welcome{grid-template-columns:1fr}.copy{text-align:center;padding:0}.copy p{margin-left:auto;margin-right:auto}.hero-actions{justify-content:center}.tiny-note{margin-bottom:15px}.place-grid{grid-template-columns:1fr 1fr}.friends{grid-template-columns:1fr}.section-title h2,.friends h2{font-size:42px}}@media(max-width:600px){.topbar{padding:0 18px;height:68px}.clock{display:none}.brand{font-size:16px}.surprise{font-size:10px;padding:9px 12px}.welcome{padding:40px 16px 55px}.copy h1{font-size:52px;letter-spacing:-2.5px}.map-wrap{height:455px;border-radius:32px;border-width:6px}.place{width:108px;min-height:88px;border-radius:18px}.building-art{font-size:29px}.place-label b{font-size:9px}.place-label small{font-size:7px}.cafe{left:5%;bottom:39%}.garden{right:5%;bottom:31%}.library{left:26%;bottom:9%}.shop{right:25%;bottom:7%}.tree{font-size:38px}.t3{font-size:42px}.places{padding:70px 18px}.section-title h2,.friends h2{font-size:38px}.place-grid{grid-template-columns:1fr}.friends{padding:70px 18px}.friend-row{grid-template-columns:1fr}.friend-row article{min-height:160px}.secret{margin:60px 18px;padding:45px 25px}.secret h2{font-size:42px}}
+
+
+/* V2 MAP UPGRADE — cozy little game-world details */
+.map-wrap{background:linear-gradient(180deg,#cfe8d9 0 38%,#a9d09d 38% 100%);isolation:isolate}
+.map-wrap:after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(135deg,transparent 55%,#ffffff18 55% 57%,transparent 57%),radial-gradient(circle at 18% 78%,#ffffff25 0 2px,transparent 3px);opacity:.7}
+.mountain{z-index:0;filter:saturate(.92)}
+.m2{opacity:.85}
+.hill-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:#8fbd88;z-index:1;box-shadow:16px 5px 0 #98c48e,8px -5px 0 #a3ca98}
+.hd1{left:24%;top:28%}.hd2{right:18%;top:25%}.hd3{left:55%;top:20%}
+.river{z-index:1;box-shadow:inset 14px 0 0 #ffffff22,inset -11px 0 0 #6fb7b65c}
+.river-shine{position:absolute;z-index:2;width:34px;height:6px;border-radius:99px;background:#e8ffff99;transform:rotate(12deg);animation:water 3s ease-in-out infinite}.rs1{right:28%;top:38%}.rs2{right:25%;top:62%;animation-delay:1.3s}
+@keyframes water{50%{translate:14px 3px;opacity:.35}}
+.bridge{width:88px;height:25px;right:18%;top:48%;font-size:0;transform:rotate(12deg);background:#b8875f;border:4px solid #fff2d6;border-radius:10px;box-shadow:0 8px 10px #5b4b3825;display:flex;align-items:center;justify-content:space-around}
+.bridge span{width:5px;height:31px;background:#8d6749;border-radius:4px}
+.road{box-shadow:0 4px 0 #d7c29f80}.road-top{width:64%;height:10%;left:17%;top:29%;transform:rotate(-4deg);z-index:1}
+.path-dots{position:absolute;z-index:3;width:110px;height:42px;background:radial-gradient(circle,#d0b487 0 4px,transparent 5px);background-size:22px 18px;opacity:.75}.pd1{left:17%;bottom:45%;transform:rotate(8deg)}.pd2{right:25%;bottom:29%;transform:rotate(-8deg)}
+.pond{box-shadow:inset 0 0 0 3px #72b2b1,0 7px 0 #7eac7c33}.pond i{position:absolute;width:12px;height:5px;border-top:2px solid #dff8ef;border-radius:50%;top:18px;left:28px;transform:rotate(-8deg)}.pond i+ i{left:55px;top:31px}
+.mini-house{position:absolute;z-index:3;width:58px;height:48px;filter:drop-shadow(0 7px 5px #31553e20)}
+.mini-house .body{position:absolute;left:7px;bottom:0;width:44px;height:30px;background:#fff7df;border:2px solid #e6d7b9;border-radius:5px 5px 8px 8px}.mini-house .roof{position:absolute;left:2px;top:2px;width:54px;height:30px;background:#d98f83;clip-path:polygon(50% 0,100% 72%,92% 82%,50% 25%,8% 82%,0 72%);filter:drop-shadow(0 3px 0 #b86f69)}.mini-house .window{position:absolute;left:26px;bottom:10px;width:10px;height:10px;background:#9fd3c7;border:2px solid #fff;border-radius:2px}.house-a{left:8%;top:21%;transform:scale(.9)}.house-b{left:58%;top:12%;transform:scale(.72)}.house-c{right:6%;bottom:8%;transform:scale(.82)}
+.fence{position:absolute;z-index:3;width:76px;height:25px;background:repeating-linear-gradient(90deg,#f7ead0 0 7px,transparent 7px 15px);border-bottom:4px solid #e8d2ad;opacity:.9}.fence-a{left:6%;bottom:39%;transform:rotate(8deg)}.fence-b{right:7%;bottom:39%;transform:rotate(-8deg)}
+.tree{z-index:4}.t5{left:34%;bottom:8%;font-size:35px}.t6{right:44%;bottom:58%;font-size:33px}
+.flower{z-index:5}.f5{left:43%;bottom:10%}.f6{right:17%;bottom:48%}
+.butterfly{position:absolute;z-index:8;left:63%;top:40%;font-size:18px;animation:butterfly 6s ease-in-out infinite}.leaf-fall{position:absolute;z-index:8;font-size:15px;animation:leaf 5s ease-in-out infinite}.lf1{left:37%;top:10%}.lf2{right:36%;top:17%;animation-delay:2s}@keyframes butterfly{50%{translate:22px -18px;rotate:8deg}100%{translate:-4px 4px}}@keyframes leaf{50%{translate:15px 32px;rotate:70deg;opacity:.4}100%{translate:-4px 55px;rotate:120deg;opacity:0}}
+.place{backdrop-filter:blur(5px);background:#fffdf4f2;border:2px solid #ffffff;box-shadow:0 15px 26px #244a3420,0 2px 0 #d9caa8}.place:after{content:"↗";position:absolute;right:10px;top:9px;font-size:11px;color:#7c9a86;opacity:.65}.building-art{filter:drop-shadow(0 3px 2px #31553e15)}
+.map-hint{position:absolute;z-index:9;right:16px;top:13px;background:#ffffffb8;border:1px solid #fff;border-radius:99px;padding:7px 10px;color:#587667;font-size:8px;letter-spacing:.5px;box-shadow:0 7px 16px #34543a12}
+@media(max-width:600px){.map-hint{font-size:7px;padding:6px 8px}.mini-house{transform:scale(.72)}.house-b{transform:scale(.58)}.house-c{transform:scale(.65)}.road-top{top:28%}.bridge{right:15%;transform:rotate(12deg) scale(.8)}.butterfly{font-size:15px}}
+
+</style>
 </head>
 <body>
   <div class="world">
@@ -34,22 +64,31 @@
         <div class="map-wrap" aria-label="Illustrated map of Matcha Town">
           <div class="map-glow"></div><div class="sun">☀</div>
           <div class="mountain m1"></div><div class="mountain m2"></div>
-          <div class="river"></div><div class="bridge">━━━━</div>
-          <div class="road road-main"></div><div class="road road-side"></div>
-          <div class="pond"></div>
+          <div class="hill-dot hd1"></div><div class="hill-dot hd2"></div><div class="hill-dot hd3"></div>
+          <div class="river"></div><div class="river-shine rs1"></div><div class="river-shine rs2"></div>
+          <div class="bridge"><span></span><span></span><span></span></div>
+          <div class="road road-main"></div><div class="road road-side"></div><div class="road road-top"></div>
+          <div class="path-dots pd1"></div><div class="path-dots pd2"></div>
+          <div class="pond"><i></i><i></i></div>
+
+          <div class="mini-house house-a"><span class="roof"></span><span class="body"></span><span class="window"></span></div>
+          <div class="mini-house house-b"><span class="roof"></span><span class="body"></span><span class="window"></span></div>
+          <div class="mini-house house-c"><span class="roof"></span><span class="body"></span><span class="window"></span></div>
+          <div class="fence fence-a"></div><div class="fence fence-b"></div>
 
           <button class="place cafe" data-place="Matcha Café"><span class="building-art">🍵</span><span class="place-label"><b>Matcha Café</b><small>fresh & cozy</small></span></button>
           <button class="place library" data-place="Cozy Library"><span class="building-art">📚</span><span class="place-label"><b>Cozy Library</b><small>quiet little books</small></span></button>
           <button class="place garden" data-place="Blossom Garden"><span class="building-art">🌸</span><span class="place-label"><b>Blossom Garden</b><small>flowers & friends</small></span></button>
           <button class="place shop" data-place="Little Shop"><span class="building-art">🛍️</span><span class="place-label"><b>Little Shop</b><small>tiny treasures</small></span></button>
 
-          <div class="tree t1">🌳</div><div class="tree t2">🌳</div><div class="tree t3">🌲</div><div class="tree t4">🌳</div>
-          <div class="flower f1">🌷</div><div class="flower f2">🌼</div><div class="flower f3">🌷</div><div class="flower f4">🌼</div>
+          <div class="tree t1">🌳</div><div class="tree t2">🌳</div><div class="tree t3">🌲</div><div class="tree t4">🌳</div><div class="tree t5">🌳</div><div class="tree t6">🌲</div>
+          <div class="flower f1">🌷</div><div class="flower f2">🌼</div><div class="flower f3">🌷</div><div class="flower f4">🌼</div><div class="flower f5">🌺</div><div class="flower f6">🌷</div>
+          <div class="butterfly">🦋</div><div class="leaf-fall lf1">🍃</div><div class="leaf-fall lf2">🍃</div>
           <button class="friend bunny" data-friend="Momo">🐰<small>Momo</small></button>
           <button class="friend bear" data-friend="Lottie">🧸<small>Lottie</small></button>
           <button class="friend cat" data-friend="Mochi">🐱<small>Mochi</small></button>
           <div class="spark s1">✦</div><div class="spark s2">✧</div><div class="spark s3">✦</div>
-          <div class="map-sign">MATCHA<br><b>TOWN</b></div>
+          <div class="map-sign">MATCHA<br><b>TOWN</b></div><div class="map-hint">✦ tap a place to visit</div>
         </div>
       </section>
 
@@ -79,6 +118,32 @@
     <footer>🍵 <b>Matcha Town</b> · a little green world made for you.</footer>
   </div>
   <div class="toast" id="toast"></div>
-  <script src="script.js"></script>
+  <script>
+const toast=document.getElementById('toast');
+let timer;
+function show(message){clearTimeout(timer);toast.textContent=message;toast.classList.add('show');timer=setTimeout(()=>toast.classList.remove('show'),2400)}
+
+document.querySelectorAll('[data-place]').forEach(el=>el.addEventListener('click',()=>show('✨ Welcome to '+el.dataset.place+'!')));
+document.querySelectorAll('[data-friend]').forEach(el=>el.addEventListener('click',()=>show('💚 '+el.dataset.friend+' says: "Let’s explore!"')));
+
+document.getElementById('surpriseBtn').addEventListener('click',()=>{
+  const choices=[
+    ['🍵','Momo saved you a cozy matcha break!'],['🌸','Lottie found a secret flower path!'],['📚','Mochi left a tiny note in the library!'],['✨','You discovered a hidden sparkle in town!'],['🛍️','A mystery treasure appeared in the Little Shop!']
+  ];
+  const [icon,msg]=choices[Math.floor(Math.random()*choices.length)];show(icon+' '+msg)
+});
+
+document.getElementById('exploreBtn').addEventListener('click',()=>document.getElementById('places').scrollIntoView({behavior:'smooth'}));
+document.getElementById('storyBtn').addEventListener('click',()=>show('🌿 Matcha Town was made for slow days and happy little moments.'));
+document.getElementById('secretBtn').addEventListener('click',()=>show('🌲 Shhh… a secret path will open soon!'));
+
+function updateClock(){
+  const now=new Date();const h=now.getHours();const m=String(now.getMinutes()).padStart(2,'0');
+  const icon=h>=18||h<6?'🌙':h>=16?'🌇':'☀️';
+  const hour=h%12||12;document.getElementById('clock').textContent=`${icon} ${hour}:${m} ${h>=12?'PM':'AM'}`;
+}
+updateClock();setInterval(updateClock,30000);
+
+</script>
 </body>
 </html>
