@@ -1,25 +1,22 @@
-# 🍵 Matcha Town v1
+# 🍵 Matcha Town v2 — Cozy Green World
 
-A tiny green playable web world made with plain HTML, CSS and JavaScript.
+A playful GitHub Pages mini-game.
 
-## GitHub Pages
-1. Upload all files to the root of your GitHub repository.
-2. Open **Settings → Pages**.
-3. Choose **Deploy from a branch**.
-4. Select your main branch and `/ (root)`.
-5. Save.
+### v2 highlights
+- Cute animated opening
+- Town Square with living NPCs
+- 8-world map
+- 🎲 Surprise Me
+- Daily Gift
+- Coins, XP and Energy
+- Fountain rewards
+- Café mini interaction
+- Garden collecting
+- Day/night toggle
+- Quests, bag and profile panels
+- Browser save with localStorage
+- Responsive mobile layout
+- No build step required
 
-## Included in v1
-- Opening screen
-- Town Square
-- Clickable locations
-- Walking NPCs
-- Fountain coin interaction
-- Coins / XP / Energy HUD
-- Welcome quest
-- Inventory panel
-- Map panel
-- Animated leaves
-- Responsive layout
-
-Next versions can add the full 8-world system, character movement, shop inventory, café minigame, gardening, save data, and more.
+### Deploy
+Upload `index.html`, `style.css`, and `script.js` to your GitHub repository root, then enable GitHub Pages from **Settings → Pages → Deploy from a branch → main → / (root)**.
