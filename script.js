@@ -1,24 +1,110 @@
-const toast=document.getElementById('toast');
-let timer;
-function show(message){clearTimeout(timer);toast.textContent=message;toast.classList.add('show');timer=setTimeout(()=>toast.classList.remove('show'),2400)}
+const state = {
+  coins: 120,
+  xp: 0,
+  energy: 5,
+  met: new Set(),
+  items: []
+};
 
-document.querySelectorAll('[data-place]').forEach(el=>el.addEventListener('click',()=>show('✨ Welcome to '+el.dataset.place+'!')));
-document.querySelectorAll('[data-friend]').forEach(el=>el.addEventListener('click',()=>show('💚 '+el.dataset.friend+' says: "Let’s explore!"')));
+const $ = (id) => document.getElementById(id);
+const toast = (msg) => {
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(window.__toast);
+  window.__toast = setTimeout(() => t.classList.remove("show"), 1800);
+};
 
-document.getElementById('surpriseBtn').addEventListener('click',()=>{
-  const choices=[
-    ['🍵','Momo saved you a cozy matcha break!'],['🌸','Lottie found a secret flower path!'],['📚','Mochi left a tiny note in the library!'],['✨','You discovered a hidden sparkle in town!'],['🛍️','A mystery treasure appeared in the Little Shop!']
-  ];
-  const [icon,msg]=choices[Math.floor(Math.random()*choices.length)];show(icon+' '+msg)
+function renderStats(){
+  $("coins").textContent = state.coins;
+  $("xp").textContent = state.xp;
+  $("energy").textContent = state.energy;
+}
+function addXP(n){
+  state.xp = Math.min(100, state.xp + n);
+  renderStats();
+}
+function openPanel(html){
+  $("panelContent").innerHTML = html;
+  $("panel").classList.remove("hidden");
+}
+$("closePanel").addEventListener("click", () => $("panel").classList.add("hidden"));
+$("panel").addEventListener("click", e => {
+  if(e.target === $("panel")) $("panel").classList.add("hidden");
 });
 
-document.getElementById('exploreBtn').addEventListener('click',()=>document.getElementById('places').scrollIntoView({behavior:'smooth'}));
-document.getElementById('storyBtn').addEventListener('click',()=>show('🌿 Matcha Town was made for slow days and happy little moments.'));
-document.getElementById('secretBtn').addEventListener('click',()=>show('🌲 Shhh… a secret path will open soon!'));
+$("enterBtn").addEventListener("click", () => {
+  $("welcome").classList.add("hidden");
+  $("game").classList.remove("hidden");
+  toast("Welcome to Matcha Town! 🍵");
+});
 
-function updateClock(){
-  const now=new Date();const h=now.getHours();const m=String(now.getMinutes()).padStart(2,'0');
-  const icon=h>=18||h<6?'🌙':h>=16?'🌇':'☀️';
-  const hour=h%12||12;document.getElementById('clock').textContent=`${icon} ${hour}:${m} ${h>=12?'PM':'AM'}`;
-}
-updateClock();setInterval(updateClock,30000);
+document.querySelectorAll(".location-card").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const place = btn.dataset.place;
+    const data = {
+      cafe: ["🍵 Matcha Café", "A cozy little café in the heart of town.", "Buy a matcha drink for 20 coins and restore 1 energy."],
+      shop: ["🛍️ Little Shop", "Tiny treasures for your tiny green world.", "Shop is warming up! More items will unlock soon."],
+      garden: ["🌱 Matcha Garden", "Fresh leaves, flowers, and quiet mornings.", "Collecting will be available in the next area update."],
+      house: ["🏠 Cozy House", "Your personal little corner of Matcha Town.", "Decorations will unlock as you explore."]
+    }[place];
+    openPanel(`<h2>${data[0]}</h2><p>${data[1]}</p><div class="quest"><b>Coming up</b><p>${data[2]}</p></div>`);
+  });
+});
+
+document.querySelectorAll(".npc").forEach(npc => {
+  npc.addEventListener("click", () => {
+    const name = npc.dataset.npc;
+    if(!state.met.has(name)){
+      state.met.add(name);
+      state.coins += 10;
+      addXP(15);
+      renderStats();
+      toast(`You met ${name}! +10 coins +15 XP ✨`);
+    } else {
+      toast(`${name}: "Have a lovely day! 🍃"`);
+    }
+  });
+});
+
+$("fountain").addEventListener("click", () => {
+  const gain = Math.floor(Math.random()*5)+1;
+  state.coins += gain;
+  addXP(5);
+  renderStats();
+  toast(`The fountain gave you ${gain} coin${gain>1?"s":""}! ✨`);
+});
+
+document.querySelectorAll(".nav-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const panel = btn.dataset.panel;
+    if(panel === "home"){ $("panel").classList.add("hidden"); return; }
+    if(panel === "quest"){
+      const count = state.met.size;
+      const pct = Math.round(count/3*100);
+      openPanel(`<h2>🎯 Welcome Quest</h2>
+        <p>Meet 3 villagers around Town Square.</p>
+        <div class="quest"><b>Progress: ${count}/3</b><div class="progress"><i style="width:${pct}%"></i></div>
+        <p>${count>=3 ? "Quest complete! 🎉 You are officially part of Matcha Town." : "Click the walking villagers to say hello."}</p>
+        </div>`);
+    }
+    if(panel === "inventory"){
+      openPanel(`<h2>🎒 Your Bag</h2><div class="quest"><b>🌿 Mystery Leaf</b><p>${state.items.includes("leaf") ? "1 collected" : "Not collected yet"}</p></div>`);
+    }
+    if(panel === "map"){
+      openPanel(`<h2>🗺️ Town Map</h2><p>Explore the places of Matcha Town.</p>
+      <div class="map-grid">
+        <div class="map-item">🏡 <b>Town Square</b><br><small>OPEN</small></div>
+        <div class="map-item">🍵 <b>Matcha Café</b><br><small>OPEN</small></div>
+        <div class="map-item">🌱 <b>Matcha Garden</b><br><small>OPEN</small></div>
+        <div class="map-item">🛍️ <b>Little Shop</b><br><small>OPEN</small></div>
+        <div class="map-item locked">🌳 <b>Whispering Forest</b><br><small>🔒 Unlock later</small></div>
+        <div class="map-item locked">🌙 <b>Moonlight Lake</b><br><small>🔒 Unlock later</small></div>
+      </div>`);
+    }
+  });
+});
+
+renderStats();
