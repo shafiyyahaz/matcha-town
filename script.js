@@ -1,67 +1,80 @@
-const S=JSON.parse(localStorage.getItem("matchaTownSave")||'null')||{coins:150,xp:0,energy:5,met:[],items:[],daily:false,night:false};
-const $=id=>document.getElementById(id);
-const save=()=>localStorage.setItem("matchaTownSave",JSON.stringify(S));
-const toast=m=>{const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove("show"),1800)};
-const stats=()=>{$("coins").textContent=S.coins;$("xp").textContent=S.xp;$("energy").textContent=S.energy};
-const xp=n=>{S.xp=Math.min(100,S.xp+n);stats();save()};
-const modal=h=>{$("content").innerHTML=h;$("modal").classList.remove("hidden")};
-$("close").onclick=()=>$("modal").classList.add("hidden");
-$("modal").onclick=e=>{if(e.target===$("modal"))$("modal").classList.add("hidden")};
-
-$("enter").onclick=()=>{$("welcome").classList.add("hidden");$("app").classList.remove("hidden");toast("Welcome home, little explorer! 🍵");};
-$("dayBtn").onclick=()=>{S.night=!S.night;$("app").classList.toggle("night",S.night);$("dayBtn").textContent=S.night?"🌙":"☀️";save();toast(S.night?"Moonlight mode ✨":"Good morning! ☀️")};
-if(S.night){$("app").classList.add("night");$("dayBtn").textContent="🌙"}
-
-document.querySelectorAll(".place").forEach(b=>b.onclick=()=>{
- const p=b.dataset.place;
- const data={
- cafe:["🍵 Matcha Café","A warm little café where every drink feels like a hug.","☕ Try a Matcha Latte","Order a cozy drink","drink"],
- garden:["🌱 Matcha Garden","Grow tiny plants, find leaves, and collect ingredients.","🌿 Gather a Leaf","Search the garden","leaf"],
- shop:["🛍️ Little Shop","A tiny shop packed with ribbons, furniture and surprises.","🎀 Browse Shop","More treasures unlock with XP.","shop"],
- house:["🏠 Cozy House","Your little home. Soon you can decorate every corner.","🛋️ Decorate","Collect furniture to make it yours.","house"]
- }[p];
- modal(`<h2>${data[0]}</h2><p>${data[1]}</p><div class="card"><b>${data[2]}</b><p>${data[3]}</p>${p==="cafe"?'<button class="main-btn" id="drink">Make Matcha — 20 🪙</button>':p==="garden"?'<button class="main-btn" id="leaf">Collect Leaf 🌿</button>':''}</div>`);
- if(p==="cafe")$("drink").onclick=()=>{if(S.coins<20){toast("Not enough coins 💭");return} if(S.energy>=5){toast("Energy is already full! ❤️");return}S.coins-=20;S.energy++;xp(10);toast("Yum! Matcha energy restored 🍵");$("modal").classList.add("hidden")};
- if(p==="garden")$("leaf").onclick=()=>{S.items.push("leaf");S.coins+=8;xp(12);stats();save();toast("You found a fresh matcha leaf! 🌿 +8 coins");$("modal").classList.add("hidden")};
-});
-
-document.querySelectorAll(".npc").forEach(n=>n.onclick=()=>{
- const name=n.dataset.npc;
- if(!S.met.includes(name)){S.met.push(name);S.coins+=12;xp(15);stats();save();toast(`You met ${name}! +12 coins +15 XP ✨`)}
- else toast(name==="Momo"?"Momo: The café has the best mornings! 🍵":name==="Mimi"?"Mimi: I found a flower! 🌸":"Kiki: Let's explore!");
-});
-
-$("fountain").onclick=()=>{const g=3+Math.floor(Math.random()*8);S.coins+=g;xp(5);stats();save();toast(`The fountain sparkled! +${g} coins ✨`)};
-
-$("daily").onclick=()=>{
- if(S.daily){toast("Come back tomorrow for another gift! 🎁");return}
- S.daily=true;S.coins+=50;S.energy=5;xp(20);stats();save();toast("Daily gift: +50 coins + full energy! 🎁");
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+const worlds=[
+ {id:"town",name:"🏡 Town Square",desc:"The heart of Matcha Town.",emoji:"🏡",open:true},
+ {id:"cafe",name:"🍵 Matcha Café",desc:"Warm drinks and tiny treats.",emoji:"🍵",open:true},
+ {id:"garden",name:"🌱 Matcha Garden",desc:"Collect leaves and hidden treasures.",emoji:"🌱",open:true},
+ {id:"shop",name:"🛍️ Little Shop",desc:"Cute things for your adventure.",emoji:"🛍️",open:true},
+ {id:"house",name:"🏠 Cozy House",desc:"A peaceful place to rest.",emoji:"🏠",open:true},
+ {id:"forest",name:"🌳 Whispering Forest",desc:"A mysterious green forest.",emoji:"🌳",open:true},
+ {id:"sakura",name:"🌸 Sakura Hill",desc:"Pink petals and a dreamy view.",emoji:"🌸",open:true},
+ {id:"lake",name:"🌙 Moonlight Lake",desc:"A magical lake under the stars.",emoji:"🌙",open:true}
+];
+let state=JSON.parse(localStorage.getItem("matchaTownV3")||'{"coins":150,"xp":0,"energy":5,"met":[],"items":[],"daily":false,"night":false,"world":"town"}');
+let px=50,py=14;
+function save(){localStorage.setItem("matchaTownV3",JSON.stringify(state));render()}
+function render(){
+ $("#coins").textContent=state.coins;$("#xp").textContent=state.xp;$("#energy").textContent=state.energy;
+ $("#clock").textContent=state.night?"Night":"Day";document.body.classList.toggle("night",state.night);
+ $("#worldName").textContent=worlds.find(w=>w.id===state.world)?.name||"🏡 Town Square";
+}
+function modal(html){$("#modalContent").innerHTML=html;$("#modal").classList.remove("hidden")}
+function close(){ $("#modal").classList.add("hidden") }
+$("#close").onclick=close;$("#modal").onclick=e=>{if(e.target.id==="modal")close()};
+$("#enterBtn").onclick=()=>{$("#start").classList.add("hide");render()};
+$("#modeBtn").onclick=()=>{state.night=!state.night;save()};
+$("#daily").onclick=()=>{
+ if(state.daily)return modal(`<div class="reward">🌿</div><h2>Daily Gift sudah diambil!</h2><p>Besok datang lagi untuk hadiah baru ✨</p>`);
+ state.daily=true;state.coins+=50;state.xp+=20;state.energy=5;save();
+ modal(`<div class="reward">🎁</div><h2>Daily Gift!</h2><p>Kamu mendapat <b>+50 coins</b>, <b>+20 XP</b> dan energy penuh!</p>`);
 };
-
-$("surprise").onclick=()=>{
- const worlds=["🏡 Town Square","🍵 Matcha Café","🌱 Matcha Garden","🛍️ Little Shop","🏠 Cozy House","🌳 Whispering Forest","🌸 Sakura Hill","🌙 Moonlight Lake"];
- const pick=worlds[Math.floor(Math.random()*worlds.length)];
- modal(`<h2>🎲 Surprise Me!</h2><p>The town chose a little adventure for you...</p><div class="card" style="text-align:center;font-size:25px">${pick}</div><p style="text-align:center">Go explore this place and see what you discover! ✨</p>`);
-};
-
-document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>{
- document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));b.classList.add("active");
- const p=b.dataset.panel;
- if(p==="home"){$("modal").classList.add("hidden");return}
- if(p==="map"){
- const worlds=[["🏡","Town Square","OPEN"],["🍵","Matcha Café","OPEN"],["🌱","Matcha Garden","OPEN"],["🛍️","Little Shop","OPEN"],["🏠","Cozy House","OPEN"],["🌳","Whispering Forest","LV 2"],["🌸","Sakura Hill","LV 3"],["🌙","Moonlight Lake","LV 5"]];
- modal(`<h2>🗺️ Your Green World</h2><p>Eight little places are waiting to become part of your story.</p><div class="world-grid">${worlds.map((w,i)=>`<div class="world-card ${i>4?'locked':''}"><span style="font-size:30px">${w[0]}</span><b>${w[1]}</b><small>${w[2]} ${i>4?"🔒":""}</small></div>`).join("")}</div>`);
+$("#surprise").onclick=()=>{let w=worlds[Math.floor(Math.random()*worlds.length)];goWorld(w.id);modal(`<div class="reward">${w.emoji}</div><h2>Surprise! Kamu pergi ke ${w.name}</h2><p>${w.desc}</p>`)};
+function goWorld(id){state.world=id;save(); if(id!=="town") buildWorld(id)}
+function buildWorld(id){
+ const w=worlds.find(x=>x.id===id);let s=$("#scene");
+ const themes={
+ cafe:["#f4d6c1","#b9d88e","☕","🍰","🪴","✨"],garden:["#c8efc0","#8ac66e","🌱","🌷","🦋","🍃"],
+ shop:["#f8d5e3","#b9d88e","🛍️","🎀","🧸","✨"],house:["#d9e9f7","#a8cf88","🏠","🛏️","🧸","💤"],
+ forest:["#a9d5c0","#6ea96e","🌳","🍄","🦊","🍃"],sakura:["#f6d4e5","#a8d58a","🌸","🏯","🦋","🌸"],
+ lake:["#9fc6e9","#719e78","🌙","🪷","🐟","✨"]
+ };
+ let t=themes[id]||themes.cafe;
+ s.className="scene";s.style.background=`linear-gradient(${t[0]} 0 55%,${t[1]} 55%)`;
+ s.innerHTML=`<div class="sun"></div><div class="moon"></div><div class="hill h1"></div><div class="hill h2"></div>
+ <div class="pond"><span>${t[4]}</span><span>${t[3]}</span></div>
+ <div class="building interact" data-action="special" style="left:8%;bottom:30%"><div>${t[2]}</div><b>${w.name}</b></div>
+ <div class="tree t1">${t[4]}</div><div class="tree t2">${t[4]}</div>
+ <div class="npc n1 interact" data-action="npc" data-name="Pip">🐿️<small>Pip</small></div>
+ <div class="npc n2 interact" data-action="npc" data-name="Mimi">🐰<small>Mimi</small></div>
+ <div id="player">🧑🏻‍🌾</div><div id="leaves">${t[5]}</div><div class="leaf l2">${t[5]}</div>`;
+ bindInteractions(); $("#worldName").textContent=w.name;
+}
+function bindInteractions(){$$(".interact").forEach(x=>x.onclick=()=>act(x.dataset.action,x.dataset.name))}
+function act(a,name){
+ if(a==="npc"){
+  if(!state.met.includes(name)){state.met.push(name);state.coins+=12;state.xp+=15;save();modal(`<div class="reward">💚</div><h2>Kamu bertemu ${name}!</h2><p>${name} memberimu <b>+12 coins</b> dan <b>+15 XP</b>.</p>`)}
+  else modal(`<div class="reward">👋</div><h2>Hai lagi, ${name}!</h2><p>${name} senang melihatmu kembali.</p>`);
  }
- if(p==="quest"){
- const n=S.met.length, pct=Math.min(100,Math.round(n/3*100));
- modal(`<h2>🎯 Cozy Quests</h2><div class="card"><b>Meet the Villagers</b><p>Say hello to Momo, Mimi and Kiki.</p><div class="progress"><i style="width:${pct}%"></i></div><p>${n}/3 met ${n>=3?"— COMPLETE! 🎉":"— keep exploring!"}</p></div><div class="card"><b>Little Explorer</b><p>Visit 3 different places around town.</p><p>🌿 Your town is full of tiny secrets.</p></div>`);
- }
- if(p==="bag"){
- modal(`<h2>🎒 Little Bag</h2><div class="card"><b>🌿 Matcha Leaves</b><p>${S.items.filter(x=>x==="leaf").length} collected</p></div><div class="card"><b>🧸 Cozy items</b><p>More collectibles will appear as you unlock worlds.</p></div>`);
- }
- if(p==="profile"){
- const level=1+Math.floor(S.xp/100);
- modal(`<h2>🌿 Little Explorer</h2><p>Welcome to your Matcha Town profile.</p><div class="card"><b>Level ${level} Explorer</b><p>⭐ ${S.xp} XP · 🪙 ${S.coins} coins · 🧑‍🤝‍🧑 ${S.met.length}/3 villagers met</p></div><div class="card"><b>Town motto</b><p>“Slow days, tiny joys, lots of matcha.” 🍵</p></div>`);
- }
+ if(a==="fountain"){let n=3+Math.floor(Math.random()*8);state.coins+=n;state.xp+=5;save();modal(`<div class="reward">⛲</div><h2>Fountain Wish!</h2><p>Koin berkilau muncul: <b>+${n} coins</b> dan +5 XP ✨</p>`)}
+ if(a==="cafe"){if(state.energy<5){state.energy=5;state.xp+=10;save();modal(`<div class="reward">🍵</div><h2>Matcha Time!</h2><p>Energy kamu kembali penuh. +10 XP!</p>`)}else modal(`<div class="reward">🍵</div><h2>Matcha Café</h2><p>Energy kamu sudah penuh. Nikmati suasananya dulu 🌿</p>`)}
+ if(a==="shop")modal(`<div class="reward">🛍️</div><h2>Little Shop</h2><p>Shop ini siap jadi tempat belanja item di update berikutnya!</p>`);
+ if(a==="house")modal(`<div class="reward">🏠</div><h2>Cozy House</h2><p>Rumah kecilmu terasa hangat dan nyaman 🧸</p>`);
+ if(a==="special"){state.xp+=8;save();modal(`<div class="reward">${worlds.find(w=>w.id===state.world).emoji}</div><h2>Exploring!</h2><p>Kamu menemukan sesuatu yang cantik. +8 XP ✨</p>`)}
+}
+$$(".interact").forEach(x=>x.onclick=()=>act(x.dataset.action,x.dataset.name));
+document.addEventListener("keydown",e=>{
+ if(!["ArrowUp","ArrowDown","ArrowLeft","ArrowRight","w","a","s","d","W","A","S","D"].includes(e.key))return;
+ e.preventDefault();let k=e.key.toLowerCase();if(e.key==="ArrowLeft"||k==="a")px=Math.max(5,px-3);if(e.key==="ArrowRight"||k==="d")px=Math.min(92,px+3);if(e.key==="ArrowUp"||k==="w")py=Math.min(70,py+3);if(e.key==="ArrowDown"||k==="s")py=Math.max(5,py-3);$("#player").style.left=px+"%";$("#player").style.bottom=py+"%";
 });
-stats();
+$$("[data-key]").forEach(b=>b.onclick=()=>{document.dispatchEvent(new KeyboardEvent("keydown",{key:b.dataset.key}))});
+$("#mapBtn").onclick=()=>modal(`<h2>🗺️ Matcha World Map</h2><p>Pilih dunia untuk dijelajahi.</p><div class="world-grid">${worlds.map(w=>`<button class="world-btn" data-w="${w.id}">${w.emoji} <b>${w.name.replace(/^\\S+ /,"")}</b><br><small>${w.desc}</small></button>`).join("")}</div>`);
+document.addEventListener("click",e=>{let b=e.target.closest("[data-w]");if(b){goWorld(b.dataset.w);close()}});
+$$(".feature").forEach(b=>b.onclick=()=>goWorld(b.dataset.world));
+$$(".nav").forEach(n=>n.onclick=()=>{
+ $$(".nav").forEach(x=>x.classList.remove("active"));n.classList.add("active");let p=n.dataset.panel;
+ if(p==="town"){goWorld("town");return}
+ if(p==="worlds")$("#mapBtn").click();
+ if(p==="quests")modal(`<h2>🎯 Quests</h2><p>🌱 <b>Meet the villagers</b><br>Temui 3 warga • progress: ${Math.min(state.met.length,3)}/3</p><p>✨ Hadiah: 50 coins + 30 XP</p>`);
+ if(p==="bag")modal(`<h2>🎒 Your Bag</h2><p>🍃 Matcha Leaves: ${state.items.length}</p><p>🔮 Mystery item: coming soon!</p>`);
+ if(p==="profile")modal(`<h2>🌿 Profile</h2><p>Level: <b>${1+Math.floor(state.xp/50)}</b></p><p>XP: ${state.xp} • Coins: ${state.coins}</p><p>Villagers met: ${state.met.length}</p>`);
+});
+bindInteractions();render();

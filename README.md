@@ -1,22 +1,15 @@
-# 🍵 Matcha Town v2 — Cozy Green World
+# Matcha Town v3 🍵🌿
+A cute mini game made with plain HTML, CSS and JavaScript.
 
-A playful GitHub Pages mini-game.
+## Cara main
+1. Extract ZIP.
+2. Open `index.html` in Chrome.
+3. Click ENTER TOWN.
+4. Use WASD / Arrow Keys or the on-screen D-pad to move.
+5. Click buildings and villagers to interact.
+6. Open Worlds to travel between all 8 worlds.
+7. Surprise Me chooses a random world.
+8. Progress is saved automatically in your browser.
 
-### v2 highlights
-- Cute animated opening
-- Town Square with living NPCs
-- 8-world map
-- 🎲 Surprise Me
-- Daily Gift
-- Coins, XP and Energy
-- Fountain rewards
-- Café mini interaction
-- Garden collecting
-- Day/night toggle
-- Quests, bag and profile panels
-- Browser save with localStorage
-- Responsive mobile layout
-- No build step required
-
-### Deploy
-Upload `index.html`, `style.css`, and `script.js` to your GitHub repository root, then enable GitHub Pages from **Settings → Pages → Deploy from a branch → main → / (root)**.
+## GitHub Pages
+Upload `index.html`, `style.css`, `script.js`, and `README.md` into your repository, then enable Pages from the main branch / root.

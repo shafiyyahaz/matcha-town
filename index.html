@@ -1,74 +1,100 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#83a96e"><title>Matcha Town — Cozy Green World</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍵</text></svg>">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Matcha Town v3 🍵</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="toast" class="toast"></div>
-
-<section id="welcome" class="welcome">
-  <div class="stars">✦　·　✧　·　✦　·　✧</div>
-  <div class="cloud wc1">☁️</div><div class="cloud wc2">☁️</div>
-  <div class="welcome-card">
-    <div class="matcha-cup">🍵</div>
-    <div class="tiny">WELCOME TO</div>
-    <h1>MATCHA<br><span>TOWN</span></h1>
-    <p>A tiny green town full of sweet little things.</p>
-    <button id="enter" class="main-btn">ENTER TOWN <b>→</b></button>
-    <div class="welcome-note">🌿 explore · collect · decorate · discover 🌿</div>
+<div id="game">
+  <div id="start" class="screen">
+    <div class="cloud c1"></div><div class="cloud c2"></div>
+    <div class="start-card">
+      <div class="logo">🌿🍵</div>
+      <h1>Matcha Town</h1>
+      <p>A tiny green town full of sweet little things.</p>
+      <button id="enterBtn" class="primary">ENTER TOWN ✨</button>
+      <small>v3 • explore • collect • discover</small>
+    </div>
   </div>
-  <div class="welcome-hills"></div>
-</section>
 
-<main id="app" class="hidden">
-<header class="topbar">
-  <button id="brand" class="brand">🍵 <span>Matcha Town</span></button>
-  <div class="wallet">
-    <span>🪙 <b id="coins">150</b></span>
-    <span>⭐ <b id="xp">0</b>/100</span>
-    <span>❤️ <b id="energy">5</b>/5</span>
+  <header class="hud">
+    <div class="brand">🌿 <b>Matcha Town</b></div>
+    <div class="stats">
+      <span>🪙 <b id="coins">150</b></span>
+      <span>⭐ <b id="xp">0</b></span>
+      <span>⚡ <b id="energy">5</b>/5</span>
+      <span>🌤️ <b id="clock">Day</b></span>
+    </div>
+    <button id="modeBtn" class="iconbtn">🌙</button>
+  </header>
+
+  <main id="main">
+    <div class="top-actions">
+      <button id="surprise" class="pill">🎲 Surprise Me</button>
+      <button id="daily" class="pill">🎁 Daily Gift</button>
+    </div>
+
+    <section class="world-wrap">
+      <div class="world-title">
+        <div>
+          <span class="eyebrow">YOU ARE IN</span>
+          <h2 id="worldName">🏡 Town Square</h2>
+        </div>
+        <button id="mapBtn" class="smallbtn">🗺️ Worlds</button>
+      </div>
+
+      <div id="scene" class="scene town">
+        <div class="sun"></div><div class="moon"></div>
+        <div class="sky-stars"></div>
+        <div class="hill h1"></div><div class="hill h2"></div>
+        <div class="path"></div>
+        <div class="pond"><span>💧</span><span>🪷</span></div>
+        <div class="cafe building interact" data-action="cafe"><div>🍵</div><b>Matcha Café</b></div>
+        <div class="shop building interact" data-action="shop"><div>🛍️</div><b>Little Shop</b></div>
+        <div class="house building interact" data-action="house"><div>🏠</div><b>Cozy House</b></div>
+        <div class="tree t1">🌳</div><div class="tree t2">🌳</div><div class="tree t3">🌳</div>
+        <div class="flowers">🌷 🌼 🌱 🌷 🌼</div>
+        <div class="fountain interact" data-action="fountain">⛲<small>tap me</small></div>
+        <div class="npc n1 interact" data-action="npc" data-name="Mimi">🐰<small>Mimi</small></div>
+        <div class="npc n2 interact" data-action="npc" data-name="Momo">🐻<small>Momo</small></div>
+        <div class="npc n3 interact" data-action="npc" data-name="Lulu">🐱<small>Lulu</small></div>
+        <div id="player">🧑🏻‍🌾</div>
+        <div id="leaves">🍃</div><div class="leaf l2">🍃</div><div class="leaf l3">🌿</div>
+      </div>
+      <div class="controls">
+        <div class="dpad">
+          <button data-key="ArrowUp">▲</button>
+          <div><button data-key="ArrowLeft">◀</button><button data-key="ArrowDown">▼</button><button data-key="ArrowRight">▶</button></div>
+        </div>
+        <div class="hint">⌨️ WASD / Arrow Keys • tap places to interact</div>
+      </div>
+    </section>
+
+    <section class="cards">
+      <button class="feature" data-world="cafe">🍵<span>Drink Matcha</span><small>restore energy</small></button>
+      <button class="feature" data-world="garden">🌱<span>Collect Leaves</span><small>find treasures</small></button>
+      <button class="feature" data-world="forest">🌳<span>Explore Forest</span><small>discover secrets</small></button>
+      <button class="feature" data-world="lake">🌙<span>Visit Lake</span><small>nightly magic</small></button>
+    </section>
+
+    <nav class="bottom-nav">
+      <button class="nav active" data-panel="town">🏡<span>Town</span></button>
+      <button class="nav" data-panel="worlds">🗺️<span>Worlds</span></button>
+      <button class="nav" data-panel="quests">🎯<span>Quests</span></button>
+      <button class="nav" data-panel="bag">🎒<span>Bag</span></button>
+      <button class="nav" data-panel="profile">🌱<span>Profile</span></button>
+    </nav>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <button id="close" class="close">×</button>
+      <div id="modalContent"></div>
+    </div>
   </div>
-  <button id="dayBtn" class="round-btn">☀️</button>
-</header>
-
-<section id="world" class="world">
-  <div class="sky"><div class="sun">☀️</div><div class="moon">🌙</div><div class="wcloud a">☁️</div><div class="wcloud b">☁️</div></div>
-  <div class="mountain m1"></div><div class="mountain m2"></div>
-  <div class="ground"></div>
-  <div class="road r1"></div><div class="road r2"></div>
-  <div class="town-sign">🍵 <b>MATCHA TOWN</b><small>Town Square</small></div>
-
-  <button class="place cafe" data-place="cafe"><i>🍵</i><b>Matcha Café</b><small>cozy drinks</small></button>
-  <button class="place garden" data-place="garden"><i>🌱</i><b>Matcha Garden</b><small>grow & collect</small></button>
-  <button class="place shop" data-place="shop"><i>🛍️</i><b>Little Shop</b><small>cute treasures</small></button>
-  <button class="place house" data-place="house"><i>🏠</i><b>Cozy House</b><small>your room</small></button>
-  <button id="fountain" class="fountain">⛲</button>
-
-  <div class="tree t1">🌳</div><div class="tree t2">🌳</div><div class="tree t3">🌲</div><div class="tree t4">🌳</div>
-  <div class="flower fl1">🌷</div><div class="flower fl2">🌼</div><div class="flower fl3">🌸</div>
-  <div class="npc n1" data-npc="Momo">🧑🏻‍🌾</div><div class="npc n2" data-npc="Mimi">👧🏻</div><div class="npc n3" data-npc="Kiki">🧒🏻</div>
-  <div id="player" class="player">🧑🏻‍🎨</div>
-  <div class="leaf l1">🍃</div><div class="leaf l2">🍃</div><div class="leaf l3">🍂</div><div class="leaf l4">🍃</div>
-  <div class="fireflies">✦　·　✦　·　✧　·　✦</div>
-</section>
-
-<div class="floating-actions">
-  <button id="surprise" class="surprise">🎲 Surprise Me</button>
-  <button id="daily" class="daily">🎁 Daily Gift</button>
 </div>
-
-<nav class="dock">
- <button class="nav active" data-panel="home">🏡<small>Town</small></button>
- <button class="nav" data-panel="map">🗺️<small>Worlds</small></button>
- <button class="nav" data-panel="quest">🎯<small>Quests</small></button>
- <button class="nav" data-panel="bag">🎒<small>Bag</small></button>
- <button class="nav" data-panel="profile">🌿<small>Profile</small></button>
-</nav>
-
-<div id="modal" class="modal hidden"><div class="modal-card"><button id="close" class="x">×</button><div id="content"></div></div></div>
-</main>
 <script src="script.js"></script>
-</body></html>
+</body>
+</html>
