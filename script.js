@@ -52,7 +52,7 @@ function buildWorld(id){
 function bindInteractions(){$$(".interact").forEach(x=>x.onclick=()=>act(x.dataset.action,x.dataset.name))}
 function openInterior(kind){
  const rooms={
- cafe:{emoji:"🍵",title:"Matcha Café",sub:"A cozy little café",items:[["🍵","Order Matcha","A warm cup restores your energy."],["🍰","Strawberry Cake","A sweet treat for your adventure."],["🪴","Window Garden","Tiny plants sway beside the window."]]},
+ cafe:{emoji:"🍵",title:"Matcha Café",sub:"A cozy little café",items:[["🍵","Order Matcha","A warm cup restores your energy."],["🍰","Serve a Customer","Play a tiny café challenge for rewards."],["🪴","Window Garden","Tiny plants sway beside the window."]]},
  shop:{emoji:"🛍️",title:"Little Shop",sub:"Little treasures, big happiness",items:[["🎀","Ribbon Bow","A cute keepsake for your bag."],["🧸","Mochi Plushie","A soft friend for your journey."],["🍃","Matcha Leaf","A little green treasure."]]},
  house:{emoji:"🏠",title:"Cozy House",sub:"Your tiny home away from home",items:[["🛏️","Rest on the Bed","Restore your energy and feel refreshed."],["🪟","Look Outside","The town looks peaceful from here."],["🧸","Hug Mochi","A little happiness goes a long way."]]}
  };
@@ -65,7 +65,16 @@ document.addEventListener("click",e=>{
  const kind=b.dataset.room, action=Number(b.dataset.roomAction);
  if(kind==="cafe"&&action===0){if(state.energy<5){state.energy=5;state.xp+=10;save();modal(`<div class="reward">🍵</div><h2>Matcha Time!</h2><p>Energy restored and +10 XP. So refreshing! 🌿</p><button class="primary" onclick="close()">Lovely!</button>`)}else modal(`<div class="reward">🍵</div><h2>Perfect Matcha</h2><p>Your energy is already full. Enjoy the cozy café!</p>`)}
  else if(kind==="house"&&action===0){state.energy=5;state.xp+=5;save();modal(`<div class="reward">🛏️</div><h2>Cozy Rest</h2><p>You feel refreshed! +5 XP and energy restored.</p>`)}
- else {const labels=[["Ribbon Bow","Mochi Plushie","Matcha Leaf"],["Window Garden","Strawberry Cake","Mochi Plushie"]];state.xp+=3; if(kind==="shop"){state.items.push(["🎀","🧸","🍃"][action])} save();modal(`<div class="reward">${kind==="shop"?["🎀","🧸","🍃"][action]:"✨"}</div><h2>${kind==="shop"?"Added to your bag!":"Sweet little moment!"}</h2><p>${kind==="shop"?"A new keepsake has been added to your bag.":"You explored a cozy corner. +3 XP!"}</p>`)}
+ else if(kind==="cafe"&&action===1){
+ const treats=["🍵 Matcha Latte","🍓 Strawberry Cake","🍪 Matcha Cookie"];
+ const chosen=treats[Math.floor(Math.random()*treats.length)];
+ modal(`<div class="reward">🧑‍🍳</div><h2>Café Challenge!</h2><p>Customer order: <b>${chosen}</b></p><p>Choose the matching order to serve them!</p><div class="world-grid">${treats.map((t,i)=>`<button class="world-btn" data-serve="${i}" data-order="${t===chosen?1:0}">${t}</button>`).join("")}</div>`);
+ } else {state.xp+=3; if(kind==="shop"){state.items.push(["🎀","🧸","🍃"][action])}else if(kind==="cafe"){state.items.push("🌿")} save();modal(`<div class="reward">${kind==="shop"?["🎀","🧸","🍃"][action]:"✨"}</div><h2>${kind==="shop"?"Added to your bag!":"Sweet little moment!"}</h2><p>${kind==="shop"?"A new keepsake has been added to your bag.":"You explored a cozy corner. +3 XP!"}</p>`)}
+});
+document.addEventListener("click",e=>{
+ const b=e.target.closest("[data-serve]"); if(!b)return;
+ if(b.dataset.order==="1"){state.coins+=20;state.xp+=15;state.items.push("⭐");save();modal(`<div class="reward">🎉</div><h2>Order served!</h2><p>Customer happy! +20 coins, +15 XP, and a ⭐ keepsake.</p>`)}
+ else {state.xp+=2;save();modal(`<div class="reward">🥄</div><h2>Almost!</h2><p>That wasn't the order, but you learned something! +2 XP. Try again next time.</p>`)}
 });
 function questPanel(){
  const quests=[
@@ -91,7 +100,7 @@ function act(a,name){
  if(a==="cafe")openInterior("cafe");
  if(a==="shop")openInterior("shop");
  if(a==="house")openInterior("house");
- if(a==="special"){state.xp+=8;save();modal(`<div class="reward">${worlds.find(w=>w.id===state.world).emoji}</div><h2>Exploring!</h2><p>Kamu menemukan sesuatu yang cantik. +8 XP ✨</p>`)}
+ if(a==="special"){state.xp+=8;state.items.push("🍃");state.coins+=4;save();modal(`<div class="reward">${worlds.find(w=>w.id===state.world).emoji}</div><h2>Discovery!</h2><p>Kamu menemukan daun matcha tersembunyi! +8 XP, +4 coins, dan 🍃 masuk ke tasmu.</p>`)}
 }
 $$(".interact").forEach(x=>x.onclick=()=>act(x.dataset.action,x.dataset.name));
 document.addEventListener("keydown",e=>{

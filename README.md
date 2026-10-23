@@ -21,3 +21,4 @@ A small, cute browser game made with HTML, CSS and JavaScript.
 
 ## GitHub Pages
 Upload `index.html`, `style.css`, `script.js`, and `README.md` to your repository's root folder. Then enable GitHub Pages from the main branch / root.
+\n\n## V5 Playable activities\n- Explore and interact in every world to collect matcha leaves and rewards.\n- Café challenge: match the customer's order to earn coins, XP, and a keepsake.\n- Shop keepsakes are added to your bag; progress saves in your browser.\n
