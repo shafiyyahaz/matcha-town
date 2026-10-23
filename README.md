@@ -1,15 +1,23 @@
-# Matcha Town v3 🍵🌿
-A cute mini game made with plain HTML, CSS and JavaScript.
+# Matcha Town v4 — Cozy Adventures 🍵🌿
+
+A small, cute browser game made with HTML, CSS and JavaScript.
+
+## What's new in V4
+- Enter cozy interiors in Matcha Café, Little Shop, and Cozy House.
+- Room activities restore energy, award XP, and let you collect keepsakes.
+- Adventure Quests now track progress and let you claim rewards.
+- Meet villagers, travel between 8 worlds, and keep your coins/XP.
+- V4 saves to its own localStorage key and can import existing V3 progress automatically.
 
 ## Cara main
-1. Extract ZIP.
+1. Extract the ZIP.
 2. Open `index.html` in Chrome.
-3. Click ENTER TOWN.
-4. Use WASD / Arrow Keys or the on-screen D-pad to move.
-5. Click buildings and villagers to interact.
-6. Open Worlds to travel between all 8 worlds.
-7. Surprise Me chooses a random world.
+3. Click **ENTER TOWN**.
+4. Move with WASD / Arrow Keys or the on-screen D-pad.
+5. Click buildings, villagers, the fountain, and room objects.
+6. Open **Worlds** to travel between 8 worlds.
+7. Use **Surprise Me** for a random destination.
 8. Progress is saved automatically in your browser.
 
 ## GitHub Pages
-Upload `index.html`, `style.css`, `script.js`, and `README.md` into your repository, then enable Pages from the main branch / root.
+Upload `index.html`, `style.css`, `script.js`, and `README.md` to your repository's root folder. Then enable GitHub Pages from the main branch / root.
